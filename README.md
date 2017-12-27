@@ -37,3 +37,9 @@ Square Every Digit (7th kyu)
 - Tests: 'test_square_every_digit.py'
 - URL: [challenge url](https://www.codewars.com/kata/square-every-digit/)
 
+The Forbes top 40 (Code Fellows Challenge)
+
+- Module 'forbes.py'
+- Tests: 'test_forbes.py'
+- URL: [codefellows url](https://codefellows.github.io/sea-python-401d5/assignments/kata_forbes_billionaires.html)
+
