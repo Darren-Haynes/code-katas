@@ -1,45 +1,37 @@
-def visualisation(expected_watch_from_side, expected_watch_from_above,
-                  actual_watch_from_side, actual_watch_from_above):
-    print('From side correct:\n{}'.format(expected_watch_from_side))
-    print('--------------------------------------')
-    print('From above correct:\n{}'.format(expected_watch_from_above))
-    print('--------------------------------------')
-    print('From side yours:\n{}'.format(actual_watch_from_side))
-    print('--------------------------------------')
-    print('From above yours:\n{}'.format(actual_watch_from_above))
-    Test.assert_equals(actual_watch_from_side, expected_watch_from_side)
-    Test.assert_equals(actual_watch_from_above, expected_watch_from_above)
+"""Test string pyramid."""
+
+import pytest
+
+from string_pyramid import watch_pyramid_from_above
+from string_pyramid import watch_pyramid_from_the_side
+from string_pyramid import count_all_characters_of_the_pyramid
+from string_pyramid import count_visible_characters_of_the_pyramid
 
 
-Test.describe('Basic Tests')
+def test_expected_side_view():
+    """Test that side_view is correct."""
+    expected = '  c  \n bbb \naaaaa'
+    assert expected == watch_pyramid_from_the_side('abc')
 
-Test.it('should handle 2 characters')
-characters = '*#'
-expected_watch_from_side = ' # \n***'
-expected_watch_from_above = '***\n*#*\n***'
-actual_watch_from_side = watch_pyramid_from_the_side(characters)
-actual_watch_from_above = watch_pyramid_from_above(characters)
-visualisation(
-    expected_watch_from_side, expected_watch_from_above,
-    actual_watch_from_side, actual_watch_from_above
-)
-Test.assert_equals(count_visible_characters_of_the_pyramid(characters), 9)
-Test.assert_equals(count_all_characters_of_the_pyramid(characters), 10)
 
-Test.it('should handle 3 characters')
-characters = 'abc'
-expected_watch_from_side = '  c  \n bbb \naaaaa'
-expected_watch_from_above = '''\
+def test_expected_top_view():
+    """Test that top_view is correct."""
+    expected = '''\
 aaaaa
 abbba
 abcba
 abbba
 aaaaa'''
-actual_watch_from_side = watch_pyramid_from_the_side(characters)
-actual_watch_from_above = watch_pyramid_from_above(characters)
-visualisation(
-    expected_watch_from_side, expected_watch_from_above,
-    actual_watch_from_side, actual_watch_from_above
-)
-Test.assert_equals(count_visible_characters_of_the_pyramid(characters), 25)
-Test.assert_equals(count_all_characters_of_the_pyramid(characters), 35)
+    assert expected == watch_pyramid_from_above('abc')
+
+
+def test_visible_character_count():
+    """Visible count should be 25 for input of 3 characters."""
+    count = 25
+    assert count_visible_characters_of_the_pyramid('abc') == count
+
+
+def test_total_character_count():
+    """Total character count should be 35 for input of 3 characters."""
+    count = 35
+    assert count_all_characters_of_the_pyramid('abc') == count
